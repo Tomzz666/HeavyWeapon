@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>电影制作流程 · 第一章：开发阶段</title>
+<style>
+  :root {
+    --bg: #fafaf8;
+    --card-bg: #ffffff;
+    --text: #2c2c2c;
+    --text-secondary: #5c5c5c;
+    --accent: #b8860b;
+    --accent-light: #f5e6c8;
+    --accent-soft: #fdf8ee;
+    --border: #e8e4db;
+    --tag-bg: #f0ede5;
+    --step-bg: #f9f7f2;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    padding: 20px 16px 60px;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* 标题区 */
+  .header {
+    text-align: center;
+    padding: 40px 0 32px;
+  }
+
+  .chapter-badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  /* 引语 */
+  .intro-block {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 36px;
+  }
+
+  .intro-block p {
+    font-size: 15px;
+    color: #5a4a30;
+    margin: 0;
+  }
+
+  /* 小节卡片 */
+  .section {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+    border: 1px solid var(--border);
+  }
+
+  .section-number {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 3px 12px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .section-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+
+  /* 通俗解释卡片 */
+  .tip-card {
+    background: #f9f8f4;
+    border: 1px solid var(--accent-light);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+
+  .tip-card .tip-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+
+  .tip-card .tip-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #3a3a2a;
+    margin-bottom: 4px;
+  }
+
+  .tip-card .tip-body {
+    font-size: 14px;
+    color: #6b6048;
+    line-height: 1.6;
+  }
+
+  /* 要点列表 */
+  ul.points {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+
+  ul.points li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  ul.points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  /* 小标题 */
+  .sub-heading {
+    font-size: 15px;
+    font-weight: 700;
+    color: #3a3a2a;
+    margin: 18px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* 有序列表 */
+  ol.steps {
+    padding-left: 20px;
+    margin: 12px 0;
+  }
+
+  ol.steps li {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.7;
+    padding-left: 4px;
+  }
+
+  ol.steps li::marker {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  /* 标签 */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .tag {
+    font-size: 12px;
+    background: var(--tag-bg);
+    color: #6b6048;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  /* 交付物 */
+  .deliverable {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-top: 32px;
+  }
+
+  .deliverable .del-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+
+  .deliverable .del-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .deliverable .del-item {
+    font-size: 13px;
+    background: var(--card-bg);
+    border: 1px solid var(--accent-light);
+    padding: 6px 14px;
+    border-radius: 20px;
+    color: #5a4a30;
+    font-weight: 500;
+  }
+
+  /* 底部 */
+  .footer {
+    text-align: center;
+    padding: 32px 0 16px;
+    color: #c4beb0;
+    font-size: 13px;
+  }
+
+  /* 响应式 */
+  @media (max-width: 480px) {
+    h1 { font-size: 24px; }
+    h2 { font-size: 18px; }
+    .section { padding: 22px 18px; }
+    .intro-block { padding: 16px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 标题 -->
+  <div class="header">
+    <div class="chapter-badge">第一章</div>
+    <h1>开发阶段</h1>
+    <p class="subtitle">Development · 电影诞生的起点</p>
+  </div>
+
+  <!-- 引语 -->
+  <div class="intro-block">
+    <p>开发阶段决定了"拍什么"和"值不值得拍"。这一阶段往往耗时最长，却最容易被忽视。</p>
+  </div>
+
+  <!-- 1.1 -->
+  <div class="section">
+    <span class="section-number">1.1</span>
+    <h2>创意来源与故事概念</h2>
+    <p class="section-desc">
+      创意可以来自原创故事、真实事件、小说改编、漫画授权等多种渠道。核心任务是将一个模糊的想法提炼成一句话能说清楚的<strong>故事核（Logline）</strong>。
+    </p>
+
+    <div class="tip-card">
+      <div class="tip-label">通俗解释</div>
+      <div class="tip-title">Logline 是什么？</div>
+      <div class="tip-body">就是"用一句话能让人听懂这部电影讲什么"。例如："一个孤独的机器人爱上了地球女孩"。好的 Logline 是项目能否吸引投资人的第一道门槛。</div>
+    </div>
+
+    <div class="sub-heading">创意评估三问</div>
+    <ol class="steps">
+      <li>这个故事有没有<strong>冲突</strong>？（主角面对什么困境）</li>
+      <li>目标观众是谁？市场规模有多大？</li>
+      <li>现在拍，时机对吗？（社会热点、竞品分析）</li>
+    </ol>
+  </div>
+
+  <!-- 1.2 -->
+  <div class="section">
+    <span class="section-number">1.2</span>
+    <h2>剧本开发与版权获取</h2>
+    <p class="section-desc">
+      剧本是整个项目的核心资产，分为<strong>故事大纲 → 分场大纲 → 初稿 → 修改稿</strong>四个递进阶段。如果故事来源于已有作品，必须在此阶段完成版权谈判与授权协议签署。
+    </p>
+
+    <div class="tip-card">
+      <div class="tip-label">通俗解释</div>
+      <div class="tip-title">分场大纲（Treatment）</div>
+      <div class="tip-body">比故事梗概详细，但比完整剧本简短，通常 10–30 页，列出每一场戏的内容走向。是投资人决定是否继续投入的重要参考文件。</div>
+    </div>
+
+    <div class="sub-heading">版权获取操作步骤</div>
+    <ol class="steps">
+      <li>确认目标作品的版权归属方（原作者、出版社或经纪公司）</li>
+      <li>发出<strong>意向书（LOI）</strong>，锁定独家谈判期</li>
+      <li>协商授权范围（地区、媒介、改编权限）</li>
+      <li>签署正式<strong>版权许可协议（Option Agreement）</strong>，通常约定 12–18 个月期限</li>
+    </ol>
+  </div>
+
+  <!-- 1.3 -->
+  <div class="section">
+    <span class="section-number">1.3</span>
+    <h2>项目可行性评估</h2>
+    <p class="section-desc">
+      在正式投入大量资源前，需要对项目从<strong>艺术、商业、技术</strong>三个维度进行综合评估，判断项目是否值得推进。
+    </p>
+
+    <div class="tip-card">
+      <div class="tip-label">通俗解释</div>
+      <div class="tip-title">可行性评估</div>
+      <div class="tip-body">说白了就是"这个项目能不能拍、拍了能不能赚、赚了够不够"，是给投资人和制片公司的一份风险说明书。</div>
+    </div>
+
+    <div class="sub-heading">评估维度清单</div>
+    <div class="tag-list">
+      <span class="tag">🎨 艺术维度 · 故事完整性、导演匹配度、类型定位</span>
+      <span class="tag">💰 商业维度 · 预估票房、市场规模、竞品表现</span>
+      <span class="tag">🔧 技术维度 · 特效难度、拍摄条件、档期风险</span>
+    </div>
+  </div>
+
+  <!-- 1.4 -->
+  <div class="section">
+    <span class="section-number">1.4</span>
+    <h2>融资方案与预算规划</h2>
+    <p class="section-desc">
+      电影融资通常采用<strong>多方联合</strong>模式，单一来源很少覆盖全部成本。预算规划需区分<strong>上线预算</strong>和<strong>下线预算</strong>两大类。
+    </p>
+
+    <div class="tip-card">
+      <div class="tip-label">通俗解释</div>
+      <div class="tip-title">上线 / 下线预算</div>
+      <div class="tip-body">
+        <strong>上线</strong>：指创意核心人员的费用（导演、编剧、主演、制片人）——可以谈判的"明星价格"。<br>
+        <strong>下线</strong>：执行层面的固定成本（摄影器材、场地租赁、后期设施）——相对固定，按实际需求估算。
+      </div>
+    </div>
+
+    <div class="sub-heading">常见融资渠道</div>
+    <ol class="steps">
+      <li>制片公司 / 电影公司自有资金预付</li>
+      <li>政府 / 地方文化基金申请（部分地区有专项补贴）</li>
+      <li>品牌植入与联合赞助预签</li>
+      <li>预售发行权（提前卖给流媒体平台或海外发行商）</li>
+      <li>私募股权或众筹（多用于独立电影）</li>
+    </ol>
+  </div>
+
+  <!-- 交付物 -->
+  <div class="deliverable">
+    <div class="del-label">✅ 阶段交付物</div>
+    <div class="del-items">
+      <span class="del-item">版权协议</span>
+      <span class="del-item">完整剧本初稿</span>
+      <span class="del-item">项目可行性报告</span>
+      <span class="del-item">融资计划书</span>
+    </div>
+  </div>
+
+  <div class="footer">电影制作流程 · 第一章完</div>
+
+</div>
+</body>
+</html>
